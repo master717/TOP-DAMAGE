@@ -1,3 +1,778 @@
+// interface.h
+#pragma once
+
+#include "stdafx.h"
+#include "Import.h"
+#include <functional>
+#include "CustomJewelBank.h"
+
+#define MAX_OBJECT			500
+#define MAX_WIN_WIDTH		640
+#define MAX_WIN_HEIGHT		480
+
+enum ObjWindowsEx
+{
+	exWinNews			= 1,
+	exWinReset			= 2,
+	exWinGrandReset		= 3,
+	exWinRanking		= 4,
+	exWinDonate			= 5,
+	exWinPremium		= 6,
+	exWinMiniMenu		= 7,
+	exWinSettings		= 8,
+	exWinPTSearchMaster	= 9,
+	exWinPTSearchUser	= 10,
+	exWinPersonalSearch	= 12,
+	exWinPersonalPrice	= 13,
+	exWinNPCBuffer,
+	exWinSmithy,
+	exWinSmithyCheck,
+	exWinCheckOffAfk,
+	exWinMarriage,
+	exWinAddPoints,
+	exWinAddResetPoint,
+	exWinCustomMenu,
+	exWinCustomMenuChangeClass,
+	exWinDungeonSiege,
+	exWinTeamVsTeam,
+	exWinTeamVsTeamStatistic,
+	exWinAchievements,
+	exWinAchievementsPower,
+	exWinTeleport,
+	exWinTeleportEvo,
+	exWinResetRage,
+	exWinDonateCheck,
+	exWinPKClear,
+	exWinAccWarning,
+	exWinAccMenu,
+	exWinAccOption,
+	exWinAccPC,
+	exWinAccMessage,
+	exWinAccNumber,
+	exWinReferralMenu,
+	exWinReferralSystem,
+	exWinReferralSystem2,
+	exWinQuest,
+	exWinLottery,
+	exWinItemMarket,
+	exWinItemMarket2,
+	exWinMenuV3,
+	exWinStatsAdvance,
+};
+
+
+enum ObjectID
+{
+		eFlag01=1,
+		eFlag02,
+		eFlag03,
+		eFlag04,
+		eFlag05,
+		eFlag06,
+		eFlag07,
+		eFlag08,
+		eFlag09,
+		eFlag10,
+		eFlag11,
+		eFlag12,
+		eFlag13,
+		eFlag14,
+		eFlag15,
+		eFlag16,
+		eFlag17,
+		eFlag18,
+		eFlag19,
+		eFlag20,
+		eFlag21,
+		eFlag22,
+		eTIME,
+		eRankPANEL_MAIN,
+		eRanking,
+		eSAMPLEBUTTON,
+		eSAMPLEBUTTON2,
+		eVip_MAIN,
+		eVip_TITLE,
+		eVip_FRAME,
+		eVip_FOOTER,
+		eVip_DIV,
+		eVip_CLOSE,
+		eVip_BRONZE,
+		eVip_SILVER,
+		eVip_GOLD,
+		eVip_PLATINUM,
+		eVip_STATUS,
+		eRanking_MAIN,
+		eRanking_CLOSE,
+		eLogo,
+		eEventTimePANEL_MAIN,
+		eEventTime_MAIN,
+		eEventTime_CLOSE,
+		eMenu,
+		eMenuBG,
+		eMenu_MAIN,
+		eMenu_TITLE,
+		eMenu_FRAME,
+		eMenu_FOOTER,
+		eMenu_DIV,
+		eMenu_CLOSE,
+		eMenu_OPT1,
+		eMenu_OPT2,
+		eMenu_OPT3,
+		eMenu_OPT4,
+		eMenu_OPT20,
+		eMenu_OPT21,
+		eMenu_OPT22,
+		eLuckymenu,
+		eLuckySpin,
+		eLuckySpinRoll,
+		eLuckySpinClose,
+		eLuckyWheelPanel,
+		eBXH,
+		eQuaMocRSMain,
+		eQuaMocRSNhan,
+		eQuaMocRSPanel,
+		eQuaMocRSNhan_CLOSE,
+		eICONQUAMOCRS,
+		eRock,
+		ePaper,
+		eScissors,
+		eCommand_MAIN,
+		eCommand_TITLE,
+		eCommand_FRAME,
+		eCommand_FOOTER,
+		eCommand_DIV,
+		eCommand_CLOSE,
+
+		eCONFIRM_MAIN,
+		eCONFIRM_BTN_OK,
+		eCONFIRM_BTN_CANCEL,
+		eCONFIRM_TITLE,
+		eCONFIRM_FRAME,
+		eCONFIRM_FOOTER,
+		eCONFIRM_DIV,
+
+		eNextCommand,
+		ePrevCommand,
+
+		eNextEvent,
+		ePrevEvent,
+			eSMITHY_MAIN,
+	eSMITHY_MAIN1,
+	eSMITHY_TITLE,
+	eSMITHY_FRAME,
+	eSMITHY_FOOTER,
+	eSMITHY_DIV,
+	eSMITHY_DIV2,
+	eSMITHY_INFOBG,
+	eSMITHY_CLOSE, 
+	eSMITHY_BACK,
+	eSMITHY_TEXT,
+	eSMITHY_TEXT2, 
+	eSMITHY_TEXT3, 
+	eSMITHY_TEXT4, 
+	eSMITHY_TEXT5, 
+	eSMITHY_TEXT6, 
+	eSMITHY_TEXT7, 
+	eSMITHY_TEXT8, 
+	eSMITHY_TEXT9, 
+	eSMITHY_TEXT10,
+	eSMITHY_L,
+	eSMITHY_R,
+	eSMITHY_INFOBG2,
+	eSMITHY_INFOBG3,
+	eSMITHY_LINE,
+	eSMITHY_POINT, 
+	eSMITHY_CHECK0,
+	eSMITHY_CHECK1,
+	eSMITHY_CHECK2,
+	eSMITHY_CHECK3,
+	eSMITHY_CHECK4,
+	eSMITHY_CHECK5,
+	eSMITHY_CHECK6,
+	eSMITHY_CHECK7,
+	eSMITHY_PAGEUP,
+	eSMITHY_PAGEDN,
+	eSMITHY_BT1,
+	eSMITHY_BT2,
+	eSMITHY_PAGEUP2,
+	eSMITHY_PAGEDN2,
+	eSMITHY_PAGEUP3,
+	eSMITHY_PAGEDN3,
+	eSMITHY_PAGEUP4,
+	eSMITHY_PAGEDN4,
+	eSMITHY_CHECKWIN_MAIN,
+	eSMITHY_CHECKWIN_TITLE, 
+	eSMITHY_CHECKWIN_FRAME, 
+	eSMITHY_CHECKWIN_FOOTER,
+	eSMITHY_CHECKWIN_DIV,
+	eSMITHY_CHECKWIN_OK,
+	eSMITHY_CHECKWIN_CLOSE, 
+
+	eCHANGINGCLASS_MAIN,
+	eCHANGINGCLASS_TITLE,
+	eCHANGINGCLASS_FRAME,
+	eCHANGINGCLASS_FOOTER,
+	eCHANGINGCLASS_DIV,
+	eCHANGINGCLASS_INFOBG,
+	eCHANGINGCLASS_MONEYBG,
+	eCHANGINGCLASS_CLOSE,
+	eCHANGINGCLASS_DW,
+	eCHANGINGCLASS_DK,
+	eCHANGINGCLASS_ELF,
+	eCHANGINGCLASS_MG,
+	eCHANGINGCLASS_DL,
+	eCHANGINGCLASS_SUM,
+	eCHANGINGCLASS_RF,
+	eUSERSPANEL_CHANGINGCLASS,
+
+	eMenu1,
+
+	eImgID_ACHIEVEMENTS_MAIN,
+	eImgID_ACHIEVEMENTS_PROGRESS_LINE,
+	eACHIEVEMENTS_PROGRESS_BG,
+	eImgID_ACHIEVEMENTS_MISSION_1,
+	eImgID_ACHIEVEMENTS_MISSION_2,
+	eImgID_ACHIEVEMENTS_MISSION_3,
+	eImgID_ACHIEVEMENTS_MISSION_4,
+	eImgID_ACHIEVEMENTS_MISSION_5,
+	eImgID_ACHIEVEMENTS_MISSION_6,
+	eImgID_ACHIEVEMENTS_MISSION_7,
+	eImgID_ACHIEVEMENTS_MISSION_8,
+	eImgID_ACHIEVEMENTS_MISSION_9,
+	eImgID_ACHIEVEMENTS_MISSION_10,
+	eImgID_ACHIEVEMENTS_MISSION_11,
+	eImgID_ACHIEVEMENTS_MISSION_12,
+	eImgID_ACHIEVEMENTS_MISSION_13,
+	eImgID_ACHIEVEMENTS_MISSION_14,
+	eImgID_ACHIEVEMENTS_MISSION_15,
+	eImgID_ACHIEVEMENTS_MISSION_16,
+	eImgID_ACHIEVEMENTS_MISSION_17,
+	eImgID_ACHIEVEMENTS_MISSION_18,
+	eImgID_ACHIEVEMENTS_MISSION_19,
+	eImgID_ACHIEVEMENTS_MISSION_20,
+	eImgID_ACHIEVEMENTS_MISSION_21,
+	eImgID_ACHIEVEMENTS_MISSION_22,
+	eImgID_ACHIEVEMENTS_MISSION_23,
+	eImgID_ACHIEVEMENTS_MISSION_24,
+	eImgID_ACHIEVEMENTS_MISSION_25,
+	eImgID_ACHIEVEMENTS_MISSION_26,
+	eImgID_ACHIEVEMENTS_MISSION_27,
+	eImgID_ACHIEVEMENTS_MISSION_28,
+	eImgID_ACHIEVEMENTS_MISSION_29,
+	eImgID_ACHIEVEMENTS_MISSION_30,
+	eImgID_ACHIEVEMENTS_MISSION_31,
+	eImgID_ACHIEVEMENTS_MISSION_32,
+	eImgID_ACHIEVEMENTS_MISSION_33,
+	eImgID_ACHIEVEMENTS_MISSION_34,
+	eImgID_ACHIEVEMENTS_MISSION_35,
+	eImgID_ACHIEVEMENTS_MISSION_36,
+	eImgID_ACHIEVEMENTS_MISSION_37,
+	eImgID_ACHIEVEMENTS_MISSION_38,
+	eImgID_ACHIEVEMENTS_MISSION_39,
+	eImgID_ACHIEVEMENTS_MISSION_40,
+	eImgID_ACHIEVEMENTS_MISSION_41,
+	eImgID_ACHIEVEMENTS_MISSION_42,
+	eImgID_ACHIEVEMENTS_MISSION_43,
+	eImgID_ACHIEVEMENTS_MISSION_44,
+	eImgID_ACHIEVEMENTS_MISSION_45,
+	eImgID_ACHIEVEMENTS_MISSION_46,
+	eImgID_ACHIEVEMENTS_MISSION_47,
+	eImgID_ACHIEVEMENTS_MISSION_48,
+	eImgID_ACHIEVEMENTS_MISSION_49,
+	eImgID_ACHIEVEMENTS_MISSION_50,
+	OBJECT_ACHIEVEMENTS_MAIN,
+	OBJECT_ACHIEVEMENTS_PROGRESS_BG,
+	OBJECT_ACHIEVEMENTS_CLOSE,
+	OBJECT_ACHIEVEMENTS_MISSIONS,
+	OBJECT_ACHIEVEMENTS_PANEL,
+	eACHIEVEMENTS_TITLE,
+	eACHIEVEMENTS_FRAME,
+	OBJECT_ACHIEVEMENTS_DAMAGE,
+	OBJECT_ACHIEVEMENTS_DEFENSE,
+	OBJECT_ACHIEVEMENTS_LIFE,
+	OBJECT_ACHIEVEMENTS_EXCELLENT,
+	OBJECT_ACHIEVEMENTS_CRITICAL,
+	eACHIEVEMENTS_FOOTER,
+	eACHIEVEMENTS_DIV,
+	eACHIEVEMENTS_CLOSE,
+
+
+		eRageSystem,
+		eRageTable,
+		eRageClose,
+		eRagePointTable,
+		eRageIcon1,
+		eRageIcon2,
+		eRageIcon3,
+		eRageIcon4,
+		eRageIcon5,
+		eRageIcon6,
+		eRageIcon7,
+		eRageIcon8,
+		eRageIcon9,
+		eRageIcon10,
+		eRageIcon11,
+		eRageIcon12,
+		eRageIcon13,
+		eRageIcon14,
+		eRageIcon15,
+		eRageIcon16,
+		eRageIcon17,
+		eRageIcon18,
+		eRageIcon19,
+		eRageIcon20,
+		eRageIcon21,
+		eRageIcon22,
+		eRageIcon23,
+		eRageIcon24,
+		eRageIcon25,
+		eRageIcon26,
+		eRageIcon27,
+		eRageIcon28,
+		eRageIcon29,
+		eRageIcon30,
+		eRageIcon31,
+		eRageIcon32,
+		eRageIcon33,
+		eRageIcon34,
+		eRageIcon35,
+		eRageTeleport,
+		eRagePet,
+		eRageReset,
+
+
+		eRAGERESET_MAIN,
+		eRAGERESET_TITLE,
+		eRAGERESET_FRAME,
+		eRAGERESET_FOOTER,
+		eRAGERESET_DIV,
+		eRAGERESET_INFOBG,
+		eRAGERESET_CLOSE,
+		eRAGERESET_OK,
+		eRAGERESET_POINT1,
+		eRAGERESET_CHECK1,
+		eRAGERESET_LINE1,
+		eRAGERESET_POINT2,
+		eRAGERESET_CHECK2,
+		eRAGERESET_LINE2,
+
+
+	eMINIMENU_MAIN,
+	eMINIMENU_TITLE,
+	eMINIMENU_FRAME,
+	eMINIMENU_FOOTER,
+	eMINIMENU_LINE,
+	eMINIMENU_ARROW_L,
+	eMINIMENU_ARROW_R,
+	eMINIMENU_BT1,
+	eMINIMENU_BT2,
+	eMINIMENU_BT3,
+	eMINIMENU_BT4,
+	eMINIMENU_BT5,
+	eMINIMENU_BT6,
+	eMINIMENU_BT7,
+	eMINIMENU_BT8,
+	eMINIMENU_BT9,
+
+	eMINIMENU_BT10,
+	eMINIMENU_BT11,
+	eMINIMENU_BT12,
+	eMINIMENU_BT13,
+	eMINIMENU_BT14,
+	eMINIMENU_BT15,
+	eMINIMENU_BT16,
+	eMINIMENU_BT17,
+	eMINIMENU_BT18,
+	eMINIMENU_BT19,
+	eMINIMENU_BT20,
+	eMINIMENU_BT21,
+	eMINIMENU_BT22,
+	eMINIMENU_BT23,
+
+	eCAMERA,
+	eCAMERA_RESET,
+
+
+
+
+
+	eCRAFT_MAIN,
+
+	// -------------
+	// ExQuest
+	// -------------
+	OBJECT_WIN_QUEST_MAIN,
+	OBJECT_WIN_QUEST_TITLE,
+	OBJECT_WIN_QUEST_FRAME,
+	OBJECT_WIN_QUEST_FOOTER,
+	OBJECT_WIN_QUEST_DIV,
+	OBJECT_WIN_QUEST_CLOSE,
+	OBJECT_WIN_QUEST_TAB,
+	OBJECT_WIN_QUEST_TAB1,
+	OBJECT_WIN_QUEST_TAB2,
+	OBJECT_WIN_QUEST_TAB3,
+	OBJECT_WIN_QUEST_FINISH,
+	OBJECT_WIN_QUEST_COUNT1,
+	OBJECT_WIN_QUEST_COUNT2,
+	OBJECT_WIN_QUEST_COUNT3,
+	OBJECT_WIN_QUEST_INFOBG,
+	OBJECT_WIN_QUEST_INFOBG2,
+	OBJECT_WIN_QUEST_LINE1,
+	OBJECT_WIN_QUEST_POINT1,
+	OBJECT_WIN_QUEST_INFO,
+	OBJECT_WIN_QUEST_INFOBG3,
+
+		//antilag
+	//option new menu
+	eOpMenu_MAINKG,
+	eOpMenu_TITLEKG,
+	eOpMenu_FRAMEKG,
+	eOpMenu_FOOTERKG,
+	eOpMenu_DIVKG,
+	eOpMenu_CLOSEKG,
+	eCheck,
+	eUnCheck,
+	eUSERSPANEL_OPTION,
+	eUSERSPANEL_STATICEFFECT,
+	eUSERSPANEL_DISABLEOBJECT,
+	eUSERSPANEL_DISABLEWINGS,
+	eUSERSPANEL_DISABLESKILL,
+
+
+
+		eJewelBank_MAIN,
+		eJewelBank_TITLE,
+		eJewelBank_FRAME,
+		eJewelBank_FOOTER,
+		eJewelBank_DIV,
+		eJewelBank_CLOSE,
+		eJewelBank_NEXT,
+		eJewelBank_PREV,
+		eJewelBank_WITHDRAW,
+};
+
+
+
+
+
+struct InterfaceObject
+{
+	DWORD	ModelID;
+	float	Width;
+	float	Height;
+	float	X;
+	float	Y;
+	float	MaxX;
+	float	MaxY;
+	DWORD	EventTick;
+	bool	OnClick;
+	bool	OnShow;
+	BYTE	Attribute;
+
+		long	OpenedValue;
+	BYTE	Speed;
+	char	StatValue[20];
+	bool	ByClose;
+	bool	FirstLoad;
+	//int		Type;
+
+	void Open()
+	{
+		this->OnShow = true; pSetCursorFocus = true;
+		this->ByClose = false;
+	};
+
+	void Open(int Value, int Speed)
+	{
+		this->OnShow = true; pSetCursorFocus = true;
+		this->OpenedValue = Value;
+		this->Speed = Speed;
+		this->ByClose = false;
+		this->FirstLoad = true;
+	};
+
+	void Close()
+	{ 
+		this->OnShow = false; 
+		pSetCursorFocus = false; 
+		this->ByClose = false;
+	};
+
+	void Close(int Value, int Speed)
+	{
+		this->OnShow = false; pSetCursorFocus = false; 
+		this->OpenedValue = Value;
+		this->Speed = Speed;
+		this->ByClose = false;
+	}
+
+	void CloseAnimated(int Speed)
+	{
+		pSetCursorFocus = false;
+		//this->OpenedValue = Value;
+		this->Speed = Speed;
+		this->ByClose = true;
+	}
+
+	bool Check()
+	{
+		return this->OnShow;
+	}
+};
+
+
+//퀘스트
+struct INTERFACE_OBJECT_INFO
+{
+	short	ObjectID;
+	DWORD	ModelID;
+	float	Width;
+	float	Height;
+	float	X;
+	float	Y;
+	char	FileName[100];
+	DWORD	EventTick;
+	bool	OnClick;
+	bool	OnShow;
+	DWORD	Attribute;
+	char	StatValue[20];
+	bool	FirstLoad;
+
+	void Open()
+	{
+		this->OnShow = true;
+		this->FirstLoad = true;
+	};
+};
+////
+
+class Interface
+{
+public:
+	//Interface();
+	// DPS 관련 변수
+     // DPS 시스템을 위한 멤버 변수
+    unsigned long lastDpsUpdateTick;
+    unsigned long totalDamage;
+    
+    float currentDPS;
+    bool showDPS;
+
+public:
+    void AddDamage(unsigned long damage);
+    void UpdateDPS();
+    void DrawDPS();
+	////
+
+
+	void ImageLoad(char* folder, int code, int arg3, int arg4, int arg5, int arg6);
+
+	void		Load();
+	static void	LoadImages();
+	static void	Work();
+	void Run();
+	void		BindObject(short ObjectID, DWORD ModelID, float Width, float Height, float X, float Y);
+	void		DrawGUI(short ObjectID, float PosX, float PosY);
+	void	    DrawGUI1(short ObjectID);
+	void		DrawTimeUI();
+	int			DrawFormat(DWORD Color, int PosX, int PosY, int Width, int Align, int Bold, LPCSTR Text, ...);
+	void		DrawFormatEx(DWORD Color, int PosX, int PosY, int Width, int Align, LPCSTR Text, ...); //퀘스트
+	void		DrawIMG(short ObjectID, float PosX, float PosY, float ScaleX, float ScaleY);
+
+	bool		WindowEx[100];
+	bool		IsWorkZone(float X, float Y, float MaxX, float MaxY);
+	bool		IsWorkZone(short ObjectID);
+	void		ResetDrawIMG(short ObjectID);
+	int			DrawMessage(int Mode, LPCSTR Text, ...);
+
+	void		DrawColorGUI(int MainID, int X, int Y, int Width, int Height, DWORD Color);
+
+	static bool	AllowGUI();
+
+	void		OpenWindowEx(int WindowID);
+	void		CloseWindowEx(int WindowID);
+	bool		CheckWindowEx(int WindowID);
+
+	bool		CheckWindow(int WindowID);
+	int			CloseWindow(int WindowID);
+	int			OpenWindow(int WindowID);
+
+	float		GetResizeX(short ObjectID);
+	int			DrawToolTip(int X, int Y, LPCSTR Text, ...);
+	float		DrawRepeatGUI(short MonsterID, float X, float Y, int Count);
+	void		DrawColoredGUI(short ObjectID, float X, float Y, DWORD Color);
+	void		DrawColoredGUI22(short ObjectID, DWORD Color);
+	void		DrawButton(short ObjectID, float PosX, float PosY, float ScaleX, float ScaleY);
+	void		PartUPandDNEx(int PointID, int UpID, int DownID, int LineID, float X, float Y, DWORD Color, int Value, char* Text);
+	void		DrawAnimatedButton(short ObjectID, float PosX, float PosY, float ScaleX, float ScaleY);
+	void		DrawAnimatedGUI(short ObjectID, float X, float Y);
+	void		DrawBarForm(float PosX,float PosY,float Width,float Height,GLfloat red, GLfloat green, GLfloat blue, GLfloat alpha);
+	void		DrawCheckLineEx(bool isChecked, int PointID, int CheckID, int LineID, float X, float Y, DWORD Color, char* Text);
+	void		TextDraw(int PosX, int PosY, int Width, int Arg5, int Color, int Arg7, int Align, HGDIOBJ Font, LPCTSTR Format, ...);
+	void		MiniButtonDraw(int BtnID, float X, float Y, bool isHover, char* Text);
+	bool		ButtonEx(DWORD Event, int ButtonID, bool Type);
+	void		DrawButtonGUI(short ObjectID, float PosX, float PosY, float Width, float Height, float ScaleX, float ScaleY,bool ScaleSize, bool ScalePosition, bool ScaleAlpha);
+	void		DrawItem(float PosX, float PosY, float Width, float Height, int ItemID, int Level, int Excl, int Anc, bool OnMouse);
+
+
+	//Vip Window
+	void		OpenVipWindow() { this->Data[eVip_MAIN].OnShow = true; pSetCursorFocus = true; };
+	void		CloseVipWindow() { this->Data[eVip_MAIN].OnShow = false; pSetCursorFocus = false; };
+	bool		CheckVipWindow() { return this->Data[eVip_MAIN].OnShow; };
+	void		DrawVipWindow();
+	bool		EventVipWindow_Main(DWORD Event);
+	bool		EventVipWindow_Close(DWORD Event);
+	bool		EventVipWindow_Bronze(DWORD Event);
+	bool		EventVipWindow_Silver(DWORD Event);
+	bool		EventVipWindow_Gold(DWORD Event);
+	bool		EventVipWindow_Platinum(DWORD Event);
+	bool		EventVipWindow_StatusVip(DWORD Event);
+
+	static void		DisableName();
+
+	//Menu
+	void		DrawMenu();
+	bool		EventDrawMenu_Open(DWORD Event);
+	void		OpenMenuWindow() { this->Data[eMenu_MAIN].OnShow = true; pSetCursorFocus = true; };
+	void		CloseMenuWindow() { this->Data[eMenu_MAIN].OnShow = false; pSetCursorFocus = false; };
+	bool		CheckMenuWindow() { return this->Data[eMenu_MAIN].OnShow; };
+	void		DrawMenuOpen();
+	bool		EventDrawMenu_Close(DWORD Event);
+	bool		EventDrawMenu_Op0(DWORD Event);
+	bool		EventDrawMenu_Op1(DWORD Event);
+	bool		EventDrawMenu_Op2(DWORD Event);
+	bool		EventDrawMenu_Op3(DWORD Event);
+	bool		EventDrawMenu_Op4(DWORD Event);
+	bool		EventDrawMenu_Op20(DWORD Event);
+	bool		EventDrawMenu_Op21(DWORD Event);
+	bool		EventDrawMenu_Op22(DWORD Event);
+	bool		EventDrawMenu_Op23(DWORD Event);
+	bool		EventRagesystems(DWORD Event);
+
+	void		DrawQuaMocRS();
+	void		EventQuaMocRS_Main(DWORD Event);
+	void		QuaMocRSState(){(Data[eQuaMocRSMain].OnShow == true)? Data[eQuaMocRSMain].Close():Data[eQuaMocRSMain].Open();};
+	void		QuaMocRSStateclose() { Data[eQuaMocRSMain].OnShow = false; pSetCursorFocus = false; };
+
+	void		DrawCameraButton();
+	bool		EventDrawCamera(DWORD Event);
+	void		DrawCameraResetButton();
+	bool		EventDrawCameraReset(DWORD Event);
+
+	void		DrawRPS();
+	void		EventRPS_Main(DWORD Event);
+
+
+	void		OpenChangingClassWindow() { this->Data[eCHANGINGCLASS_MAIN].OnShow = true; pSetCursorFocus = true; };
+	void		CloseChangingClassWindow() { this->Data[eCHANGINGCLASS_MAIN].OnShow = false; pSetCursorFocus = false; };
+	bool		CheckChangingClassWindow() { return this->Data[eCHANGINGCLASS_MAIN].OnShow; };
+
+	//void SwitchJewelBank(){ (this->Data[eJEWELBANK_MAIN].OnShow == true) ? this->Data[eJEWELBANK_MAIN].Close() : this->Data[eJEWELBANK_MAIN].Open(); };
+
+	static void DrawItem2(float PosX, float PosY, float Width, float Height, int ItemID, int Level, int Excl, int Anc, bool OnMouse);
+	void DrawWindow(int ObjMain, int ObjTitle, int ObjFrame, int ObjFooter, int Repeat, float X, float Y, char* Text);
+
+	void		CloseAllCustomWindow();
+	void		DrawChangingClassWindow();
+	bool		EventChangingClassWindow_Main(DWORD Event);
+	bool		EventChangingClassWindow_Close(DWORD Event);	
+	bool		EventChangingClassWindow_DW(DWORD Event);
+	bool		EventChangingClassWindow_DK(DWORD Event);
+	bool		EventChangingClassWindow_ELF(DWORD Event);
+	bool		EventChangingClassWindow_MG(DWORD Event);
+	bool		EventChangingClassWindow_DL(DWORD Event);
+	bool		EventChangingClassWindow_SUM(DWORD Event);
+	bool		EventChangingClassWindow_RF(DWORD Event);
+
+	//AntilagSystem
+	bool Antilagclose(DWORD Event);
+	void DrawOpAntiLag();
+	bool EventUsersPanelAntiLag_EFFECTSTATIC(DWORD Event);
+	bool EventUsersPanelAntiLag_OBJECT(DWORD Event);
+	bool EventUsersPanelAntiLag_WINGS(DWORD Event);
+	bool EventUsersPanelAntiLag_SKILL(DWORD Event);
+	int DisableEffectStatic; //effectstatic
+	int DisableObject; //object
+	int Disablewings; //wings
+	int Disableskill;//skill
+	DWORD       MenuAntlagDelayClick;	
+	void		OpenOpMenuAntiLag() { this->Data[eOpMenu_MAINKG].OnShow = true; pSetCursorFocus = true; };
+	void		CloseOpMenuAntiLag() { this->Data[eOpMenu_MAINKG].OnShow = false; pSetCursorFocus = false; };
+	bool		CheckOpMenuAntiLag() { return this->Data[eOpMenu_MAINKG].OnShow; };
+	//Draw Confirm window
+	void		DrawConfirmOpen();
+	bool		EventConfirm_OK(DWORD Event);
+	bool		EventConfirm_CANCEL(DWORD Event);
+
+			//----- FPS
+	int			lastReport;
+	int			frameCount;
+	int			frameRate;
+	char		FPS_REAL[30];
+	void		UPDATE_FPS();
+	void		guiMonitore();
+//------------------------ ping RTT:
+	int			iniciador;
+	int			msPing;
+	int			lastSend;
+	int			validar;
+	char		ServerPing[50];
+	char		ultimoPing[50];
+	int			ultimo_Ping;
+	char		ServerRTT[50];
+	char		ultimoRTT[50];
+	int			ultimo_RTT;
+	void		DrawPing();
+	void		SendPingRecv();
+
+	void		DrawAutoCtrl();
+	void		DrawAutoCtrl1();
+	void		DrawAutoCtrl2();
+	void		DrawAutoCtrl3();
+	void        DrawM();
+	void		DrawAutoChange();
+	void		DrawOffExp();
+	void		DrawGuildAttack();
+	void		DrawLogo(bool active);
+	void		CloseCustomWindow();
+
+	int timehpbar;
+	int hpbarresult;
+
+	int			ConfirmSlot;
+	InterfaceObject Data[MAX_OBJECT];
+
+	bool CheckInQueue(std::string name); //퀘스트
+	void AddToQueue(std::string name, void(Interface::* func)());
+	void DelFromQueue(std::string name);
+	//bool ButtonEx(DWORD Event, int ButtonID, bool Type);
+	void DrawQuestSystemWindow(); //ExQuest
+	
+	bool ShowInfoUser;
+	bool ShowEffects;
+	void SwitchShowInfoUser();
+	void SwitchShowEffects();
+	DWORD AutoControlDelay;
+	int varTestCntrl;
+	void AutoPVP();
+	void DrawText(DWORD Color, int PosX, int PosY, int Width, int Align, LPCSTR Text, ...);
+	bool IsWorkZone2(float X, float Y, float MaxX, float MaxY);
+
+	std::map<std::string, std::function<void()>> m_InterfaceQueue; //퀘스트
+private:
+	std::map<int, struct INTERFACE_OBJECT_INFO> m_InterfaceInfo; //퀘스트
+	
+};
+extern Interface gInterface;
+
+///////////////////end
+
+
+
+
+
+
+////////////////interface.cpp
 #include "stdafx.h"
 #include "CustomBuyVip.h"
 #include "CustomCommandInfo.h"
